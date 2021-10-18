@@ -10,4 +10,9 @@ class Surat extends Model
     use HasFactory;
 
     protected $table = "surats";
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,"id");
+    }
 }
