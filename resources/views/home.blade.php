@@ -29,17 +29,15 @@
 				<thead>
 					<th>No</th>
 					<th>Subject</th>
-					<th>Detail</th>
 					<th>Action</th>
 				</thead>
 				<tbody id="surat_list" name="surat_list">
 					@foreach($surat as $srt)
 					<tr id="surat">
-						<td>{{$loop->iteration}}</td>
+						<td>{{$loop->iteration()}}</td>
 						<td>{{$srt->subject ?? 'null'}}</td>
-						<td><button class=" btn btn-sm btn-primary">Detail</button></td>
 						<td>
-							<button class="btn btn-sm btn-detail open_modal">
+							<button class="btn btn-sm btn-detail edit_modal">
 								<i class="fas fa-edit"></i>
 							</button>
 							<button class="btn btn-sm btn-delete delete-product">
@@ -53,9 +51,7 @@
 		</div>
 	</div>
 
- <input id="url" type="hidden" value="{{ Request::url() }}">
-
-<!-- Modal -->
+<!-- Modal Create -->
 <div class="modal fade" id="form" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -69,7 +65,7 @@
         <form class="form" name="frmSurat" id="frmSurat" novalidate="">
         	<div class="form-group">
         		<label for="" class="label">Subject</label>
-        		<input type="text" class="form-control" id="subject" name="subject">
+        		<input type="text" class="form-control" id="subject" name="subject" value="{{old('subject')}}">
         	</div>
         	<div class="form-group">
         		<label for="" class="label">Body</label>
@@ -79,12 +75,45 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-window-close"></i></button>
-        <button type="submit" class="btn btn-primary" id="btn-save" value="add">add</button>
-        <input type="hidden" id="id" name="id" value="0">
+        <button type="submit" class="btn btn-primary" id="btn-save" value="save">Save</button>
       </div>
     </div>
   </div>
 </div>
+<!-- end modal create -->
+
+<!-- modal edit -->
+
+<div class="modal fade" id="form-edit" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Buat Surat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form" name="form-edit" id="form-edit" novalidate="">
+        	<div class="form-group">
+        		<label for="" class="label">Subject</label>
+        		<input type="text" class="form-control" id="subject" name="subject" value="">
+        	</div>
+        	<div class="form-group">
+        		<label for="" class="label">Body</label>
+        		<textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
+        	</div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-window-close"></i></button>
+        <button type="submit" class="btn btn-primary" id="btn-save" value="save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end modal edit -->
 
 </div>
 

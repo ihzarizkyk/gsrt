@@ -18,7 +18,6 @@ class HomeController extends Controller
     public function edit($id)
     {
         $data = Surat::find($id);
-        return response()->json($data);
     }
 
     public function store(Request $req)
@@ -27,18 +26,19 @@ class HomeController extends Controller
         $surat->subject = $req->subject;
         $surat->body = $req->body;
         $surat->save();
-        return response()->json($surat);
     }
 
-    public function update(Request $req)
+    public function update(Request $req,$id)
     {
-        //
+        Surat::where("id",$id)->update([
+            "subject" => $req->subject,
+            "body" => $req->body
+        ]);
     }
 
     public function destroy($id)
     {
         $surat = Surat::find($id);
         $surat->delete();
-        return response()->json($surat);
     }
 }
