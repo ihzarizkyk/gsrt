@@ -16,10 +16,10 @@ use App\Http\Controllers\HomeController;
 
 Route::get("/",[HomeController::class,"index"]);
 
-Route::get("/surat/{id}/edit",[HomeController::class,"edit"]);
+Route::get("/surat/{id?}",[HomeController::class,"edit"]);
 
-Route::post("/surat",[HomeController::class,"store"]);
+Route::post("/surat",[HomeController::class,"store"])->name("surat.store");
 
-Route::patch("/surat/update",[HomeController::class,"update"]);
+Route::put("/surat/{id?}",[HomeController::class,"update"])->name("surat.update");
 
-Route::get("/surat/{id}",[HomeController::class,"destroy"]);
+Route::get("/surat/{id?}",[HomeController::class,"destroy"]);
